@@ -36,8 +36,8 @@ std::ostream &operator<<(std::ostream &out, Matrix const &mat);
  |      Macierz wypelnione wartoscia 0.                                       |
  */
 Matrix::Matrix() {
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
+    for (int i = 0; i < SIZE; ++i) {
+        for (int j = 0; j < SIZE; ++j) {
             value[i][j] = 0;
         }
     }
@@ -52,8 +52,8 @@ Matrix::Matrix() {
  |      Macierz wypelniona wartosciami podanymi w argumencie.                 |
  */
 Matrix::Matrix(double tmp[SIZE][SIZE]) {
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
+    for (int i = 0; i < SIZE; ++i) {
+        for (int j = 0; j < SIZE; ++j) {
             value[i][j] = tmp[i][j];
         }
     }
@@ -71,8 +71,8 @@ Matrix::Matrix(double tmp[SIZE][SIZE]) {
 
 Vector Matrix::operator * (Vector tmp) {
     Vector result;
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
+    for (int i = 0; i < SIZE; ++i) {
+        for (int j = 0; j < SIZE; ++j) {
             result[i] += value[i][j] * tmp[j];
         }
     }
@@ -137,8 +137,8 @@ const double &Matrix::operator () (unsigned int row, unsigned int column) const 
  */
 Matrix Matrix::operator + (Matrix tmp) {
     Matrix result;
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
+    for (int i = 0; i < SIZE; ++i) {
+        for (int j = 0; j < SIZE; ++j) {
             result(i, j) = this->value[i][j] + tmp(i, j);
         }
     }
@@ -152,8 +152,8 @@ Matrix Matrix::operator + (Matrix tmp) {
  |      mat - macierz.                                                         |
  */
 std::istream &operator>>(std::istream &in, Matrix &mat) {
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
+    for (int i = 0; i < SIZE; ++i) {
+        for (int j = 0; j < SIZE; ++j) {
             in >> mat(i, j);
         }
     }
@@ -168,8 +168,8 @@ std::istream &operator>>(std::istream &in, Matrix &mat) {
  |      mat - macierz.                                                        |
  */
 std::ostream &operator<<(std::ostream &out, const Matrix &mat) {
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
+    for (int i = 0; i < SIZE; ++i) {
+        for (int j = 0; j < SIZE; ++j) {
             out << "| " << mat(i, j) << " | "; //warto ustalic szerokosc wyswietlania dokladnosci liczb
         }
         std::cout << std::endl;
