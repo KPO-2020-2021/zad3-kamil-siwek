@@ -161,7 +161,7 @@ const double &Vector::operator [] (int index) const {
  |      Wartosc wektora w danym miejscu tablicy.                              |
  */
 double &Vector::operator[](int index) {
-    return const_cast<double &>(const_cast<const Vector *>(this)->operator[](index));
+    return const_cast<double &>(const_cast<const Vector *>(this)->operator[](index)); // czemu tak ?
 }
 
 
@@ -173,11 +173,12 @@ double &Vector::operator[](int index) {
  */
 std::ostream &operator << (std::ostream &out, Vector const &tmp) {
     for (int i = 0; i < SIZE; ++i) {
-        out << "[ " << tmp[i] << " ]\n";
+        out << "[ " << tmp[i] << " ]\n"; // jeśli użyjemy tego przeciązenia do zapisu do pliku zapisze się to [x] \n [y] gnuplot szczytje punkty jakow wartosci wiersza z kolumn x y czy to nie bedzie powodowalo bledu?
     }
     return out;
 }
 
+ 
 
 /******************************************************************************
  |  Przeciazenie operatora >>                                                 |
