@@ -62,6 +62,7 @@ Vector::Vector(double tmp[SIZE]) {
 }
 
 
+
 /******************************************************************************
  |  Realizuje dodawanie dwoch wektorow.                                       |
  |  Argumenty:                                                                |
@@ -173,7 +174,7 @@ double &Vector::operator[](int index) {
  */
 std::ostream &operator << (std::ostream &out, Vector const &tmp) {
     for (int i = 0; i < SIZE; ++i) {
-        out << "[ " << tmp[i] << " ]\n"; // jeśli użyjemy tego przeciązenia do zapisu do pliku zapisze się to [x] \n [y] gnuplot szczytje punkty jakow wartosci wiersza z kolumn x y czy to nie bedzie powodowalo bledu?
+        out << "[ " << tmp[i] << " ]\n"; 
     }
     return out;
 }
