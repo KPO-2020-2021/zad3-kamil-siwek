@@ -88,9 +88,7 @@ void PrzykladZapisuWspolrzednychDoStrumienia( std::ostream&     StrmWy,
  * \retval true - gdy operacja zapisu powiodła się,
  * \retval false - w przypadku przeciwnym.
  */
-bool PrzykladZapisuWspolrzednychDoPliku( const char  *sNazwaPliku,
-                                         double       Przesuniecie
-                                       )
+bool PrzykladZapisuWspolrzednychDoPliku( const char  *sNazwaPliku,Rectangle rec)
 {
   std::ofstream  StrmPlikowy;
 
@@ -100,8 +98,8 @@ bool PrzykladZapisuWspolrzednychDoPliku( const char  *sNazwaPliku,
 	 << ":(  nie powiodla sie." << std::endl;
     return false;
   }
-
-  PrzykladZapisuWspolrzednychDoStrumienia(StrmPlikowy, Przesuniecie);
+std::cout<<rec;
+  StrmPlikowy<<rec;
 
   StrmPlikowy.close();
   return !StrmPlikowy.fail();
@@ -154,17 +152,18 @@ int main() {
    //  jako wspolrzedne punktow podajemy tylko x,y.
    //
   Lacze.ZmienTrybRys(PzG::TR_2D);
-
-  PrzykladZapisuWspolrzednychDoStrumienia(std::cout,0);
-  if (!PrzykladZapisuWspolrzednychDoPliku("prostokat.dat",0)) return 1;
+Rectangle rec(argumentsV,DL_KROTKI_BOK,DL_DLUGI_BOK);
+ 
+  if (!PrzykladZapisuWspolrzednychDoPliku("prostokat.dat",rec)) return 1;
   Lacze.Rysuj(); // <- Tutaj gnuplot rysuje, to co zapisaliśmy do pliku
   std::cout << "Naciśnij ENTER, aby kontynuowac" << std::endl;
   std::cin.ignore(100000,'\n');
    //----------------------------------------------------------
    // Ponownie wypisuje wspolrzedne i rysuje prostokąt w innym miejscu.
    //
-  PrzykladZapisuWspolrzednychDoStrumienia(std::cout,50);
-  if (!PrzykladZapisuWspolrzednychDoPliku("prostokat.dat",50)) return 1;
+    double V_R[] = {10.0, 20.0};
+    rec=rec+V_R;
+  if (!PrzykladZapisuWspolrzednychDoPliku("prostokat.dat",rec)) return 1;
   Lacze.Rysuj(); // <- Tutaj gnuplot rysuje, to co zapisaliśmy do pliku
   std::cout << "Naciśnij ENTER, aby kontynuowac" << std::endl;
   std::cin.ignore(100000,'\n');
