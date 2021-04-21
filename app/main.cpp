@@ -117,19 +117,6 @@ int main() {
             << std::endl;
   // std::system("cat ../LICENSE");
   // do zadania Rotacja 2D
-  std::cout << "Vector:" << std::endl;
-  Vector tmpV1 = Vector();
-  std::cout << "Vector - konstruktor bezparametryczny:\n" << tmpV1 << std::endl;
-  double argumentsV[] = {1.0, 2.0};
-  Vector tmpV2 = Vector(argumentsV);
-  std::cout << "Vector - konstruktor parametryczny:\n" << tmpV2 << std::endl;
-
-  std::cout << "Matrix:" << std::endl;
-  Matrix tmpM1 = Matrix();
-  std::cout << "Matrix - konstruktor bezparametryczny:\n" << tmpM1 << std::endl;
-  double argumentsM[][SIZE] = {{1.0, 2.0},{3.0, 4.0}};
-  Matrix tmpM2 = Matrix(argumentsM);
-  std::cout << "Matrix - konstruktor parametryczny:\n" << tmpM2 << std::endl;
 
     PzG::LaczeDoGNUPlota  Lacze;  // Ta zmienna jest potrzebna do wizualizacji
                                 // rysunku prostokata
@@ -152,25 +139,67 @@ int main() {
    //  jako wspolrzedne punktow podajemy tylko x,y.
    //
   Lacze.ZmienTrybRys(PzG::TR_2D);
+  double wec3[]={20,20};
+  Vector argumentsV(wec3);
 Rectangle rec(argumentsV,DL_KROTKI_BOK,DL_DLUGI_BOK);
  
-  if (!PrzykladZapisuWspolrzednychDoPliku("prostokat.dat",rec)) return 1;
-  Lacze.Rysuj(); // <- Tutaj gnuplot rysuje, to co zapisaliśmy do pliku
-  std::cout << "Naciśnij ENTER, aby kontynuowac" << std::endl;
-  std::cin.ignore(100000,'\n');
-   //----------------------------------------------------------
-   // Ponownie wypisuje wspolrzedne i rysuje prostokąt w innym miejscu.
-   //
-    double V_R[] = {10.0, 20.0};
-    rec=rec+V_R;
-  if (!PrzykladZapisuWspolrzednychDoPliku("prostokat.dat",rec)) return 1;
-  Lacze.Rysuj(); // <- Tutaj gnuplot rysuje, to co zapisaliśmy do pliku
-  std::cout << "Naciśnij ENTER, aby kontynuowac" << std::endl;
-  std::cin.ignore(100000,'\n');
+  
 
   // Z bazy projektu-wydmuszki Boiler Plate C++:
   // Bring in the dummy class from the example source,
   // just to show that it is accessible from main.cpp.
+  char opcja;
+int ile;//ile razy ma sie powturzyc obrut
+double kat;
+double wek[2];
+std::cout<<"o"<<std::endl;
+std::cout<<"p"<<std::endl;
+std::cout<<"w"<<std::endl;
+std::cout<<"m"<<std::endl;
+std::cout<<"k"<<std::endl;   
+
+while (opcja != 'k')
+{
+   if (!PrzykladZapisuWspolrzednychDoPliku("../datasets/prostokat.dat",rec)) return 1;
+  Lacze.Rysuj();
+    std::cin>>opcja;
+    switch(opcja)
+    {
+        case 'o':
+        {
+            std::cin>>kat;
+            std::cin>>ile;
+            for(int i=0; i<ile; i++)
+            {
+               Matrix tmpM1;
+               tmpM1.obr(kat,rec);
+            }
+        }break;
+        case 'p':
+        {
+          double x,y;
+            std::cin>>x>>y;
+             wek[0]=x;
+             wek[1]=y;
+              Vector tmpV1 (wek);
+            rec.move(tmpV1);
+        }break;
+        case 'w':
+        {
+            std::cout<<rec;
+        }break;
+         case 'm':
+        {
+            std::cout<<"o"<<std::endl;
+std::cout<<"p"<<std::endl;
+std::cout<<"w"<<std::endl;
+std::cout<<"m"<<std::endl;
+std::cout<<"k"<<std::endl;        }break;
+    }
+    //kod rysujacy w gnuplocie
+    
+}
   Dummy d = Dummy();
   return d.doSomething() ? 0 : -1;
+
 }

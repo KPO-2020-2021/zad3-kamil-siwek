@@ -20,6 +20,11 @@ public:
     const Vector &operator[](int index) const;
 
     Vector &operator[](int index);
+
+    void move(Vector arg)
+    {
+         *this=*this+arg;
+    }
 };
 
 Rectangle::Rectangle()
@@ -66,3 +71,4 @@ std::ostream &operator<<(std::ostream &out, Rectangle const &tmp)
     out << tmp[0]<< std::endl;
     return out;
 }
+

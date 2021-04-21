@@ -2,6 +2,7 @@
 
 #include "size.hh"
 #include "vector.hh"
+#include "rectangle.hh"
 #include <iostream>
 #include <cstdlib>
 
@@ -18,12 +19,30 @@ public:
     Vector operator * (Vector tmp);           // Operator mnożenia przez wektor
 
     Matrix operator + (Matrix tmp);
-
+Rectangle operator * (Rectangle tmp); 
     double  &operator () (unsigned int row, unsigned int column);
     
     const double &operator () (unsigned int row, unsigned int column) const;
+    void obr(double kat, Rectangle &rec);
 };
+Rectangle Matrix::operator * (Rectangle tmp)
+{
+    Rectangle wynik;
+    for(int i=0; i<4; i++)
+wynik[i]= *this*tmp[i];
 
+return wynik;
+
+}
+ void Matrix::obr(double kat, Rectangle &rec)
+ {
+     double rad=kat*M_PI/180;
+value[0][0]=cos(rad);
+value[0][1]=-sin(rad);
+value[1][0]=sin(rad);
+value[1][1]=cos(rad);
+rec=*this*rec;
+ }
 std::istream &operator>>(std::istream &in, Matrix &mat);
 
 std::ostream &operator<<(std::ostream &out, Matrix const &mat);
